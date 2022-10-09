@@ -1,23 +1,33 @@
-const { loginAuth } = require("../database/auth");
+/* eslint-disable no-param-reassign */
+const { loginAuth } = require('../database/auth');
+const { generateJWT } = require('../jwt/generateJWT');
 
 const authLogin = (req, res) => {
-    const {email, password } = req.body;
+  const { email, password } = req.body;
 
-    console.log('POST Login');
+  // eslint-disable-next-line no-console
+  console.log('POST Login');
 
-    loginAuth(email, password)
-    .then(data => {
+  loginAuth(email, password)
+    .then(async (data) => {
+        if (data.uid) {
+            const token = await generateJWT(data.uid);
+            data = {
+                ...data,
+                token,
+            };
+        }
+
         return res.json({
-            ok: data
-        })
+            data,
+        });
     })
-    .catch(err => {
-        return res.status(500).json({
-            ok: false
-        })
-    })
-}
+    .catch(() => res.status(500).json({
+            ok: false,
+            msg: 'internal server error',
+        }));
+};
 
 module.exports = {
-    authLogin
-}
+    authLogin,
+};

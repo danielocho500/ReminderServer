@@ -1,8 +1,5 @@
-const loginQuery = (email, pass) => {
-    return `select * from user where email='${email}' AND pass='${pass}'`
-}
-
+const loginQuery = (email, pass) => `select * from Users where Email='${email}' AND Password='${pass}'`;
 
 module.exports = {
-    loginQuery
-}
+    loginQuery,
+};

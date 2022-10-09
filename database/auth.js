@@ -1,39 +1,38 @@
-const mysql = require('mysql')
-const {connectionData} = require('./connection')
-const {loginQuery} = require('./querys')
+/* eslint-disable no-else-return */
+require('dotenv').config();
+const mysql = require('mysql2');
+const { loginQuery } = require('./querys');
 
-const loginAuth = (email, pass) => {
-    return new Promise((resolve, reject) => {
-        
-        if(email == "daniel@perrito.com" && pass== "12345"){
-            resolve(true)
+const loginAuth = async (email, pass) => new Promise((resolve, reject) => {
+        const connection = mysql.createConnection(process.env.DATABASE_URL);
+
+        connection.connect();
+        connection.query(loginQuery(email, pass), (err, rows) => {
+        if (err || rows === undefined) {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            return reject({
+                ok: false,
+            });
         }
-        else{
-            resolve(false);
+
+        if (rows.length > 0) {
+            connection.end();
+            return resolve({
+                ok: true,
+                logged: true,
+                uid: rows[0].Uid,
+            });
+        } else {
+            connection.end();
+            return resolve({
+                ok: true,
+                logged: false,
+                msg: 'Incorrect credentials',
+            });
         }
-
-
-        //const connection = mysql.createConnection(connectionData)
-
-        //connection.connect();
-        
-        // connection.query(loginQuery(email, pass), (err, rows) => {
-    
-        //     if(err)
-        //         reject(err)
-
-        //     if (rows.length > 0){
-        //         connection.end()
-        //         resolve(true)
-        //     }
-        //     else{
-        //         connection.end()
-        //         resolve(false)
-        //     }
-        // })
-    })      
-}
+        });
+    });
 
 module.exports = {
-    loginAuth
-}
+    loginAuth,
+};
