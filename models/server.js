@@ -1,39 +1,40 @@
-require('dotenv').config()
-const path = require('path')
+/* eslint-disable no-console */
+/* eslint-disable global-require */
+/* eslint-disable no-unused-vars */
+require('dotenv').config();
+const path = require('path');
 
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
 class Server {
-    constructor(){
-        this.app = express()
-        this.port = process.env.PORT || 8080
-        
-        this.home = ''
-        this.authPath= '/api/auth'
+    constructor() {
+        this.app = express();
+        this.port = process.env.PORT || 8080;
+        this.home = '';
+        this.authPath = '/api/auth';
 
-        this.middlewares()
+        this.middlewares();
 
-        this.routes()
-        this.listen()
+        this.routes();
+        this.listen();
     }
 
-    middlewares(){
-        
-        this.app.use(cors())
-        this.app.use( express.json())         
-        this.app.use(express.static('public'))
+    middlewares() {
+        this.app.use(cors());
+        this.app.use(express.json());
+        this.app.use(express.static('public'));
     }
 
-    routes(){
-        this.app.use(this.authPath, require('../routes/auth'))
+    routes() {
+        this.app.use(this.authPath, require('../routes/auth'));
     }
 
-    listen(){
+    listen() {
         this.app.listen(this.port, () => {
-            console.log("servidor corriendo en puerto: "+this.port)
-        })
+            console.log(`servidor corriendo en puerto: ${this.port}`);
+        });
     }
 }
 
-module.exports = Server
+module.exports = Server;
