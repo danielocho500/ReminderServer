@@ -15,7 +15,9 @@ const authLogin = async (req, res) => {
         return res.status(500).json({
             ok: false,
             msg: 'internal server error',
-            logged: false,
+            data: {
+                logged: false,
+            },
         });
     }
 
@@ -25,7 +27,9 @@ const authLogin = async (req, res) => {
         return res.status(401).json({
             ok: true,
             msg: 'The credentials are incorrect',
-            logged: false,
+            data: {
+                logged: false,
+            },
         });
     }
 
@@ -35,10 +39,10 @@ const authLogin = async (req, res) => {
 
         return res.status(200).json({
             ok: true,
-            logged: true,
             userData: {
                 emailconfirmed: user.emailconfirmed,
                 isregistered: user.isregistered,
+                logged: true,
             },
         });
     } catch {
