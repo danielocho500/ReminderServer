@@ -27,7 +27,7 @@ const authLogin = async (req, res) => {
         return res.status(401).json({
             ok: true,
             msg: 'The credentials are incorrect',
-            data: {
+            userData: {
                 logged: false,
             },
         });
