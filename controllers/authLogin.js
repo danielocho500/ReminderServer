@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const { verifyConnection } = require('../database/verifyConnection');
+const { checkPassword } = require('../helpers/checkPassword');
 const { getRequestData } = require('../helpers/getRequestData');
 const { generateJWT } = require('../jwt/generateJWT');
 const User = require('../models/User');
@@ -21,9 +22,10 @@ const authLogin = async (req, res) => {
         });
     }
 
-    const user = await User.findOne({ where: { email, password } });
+    const user = await User.findOne({ where: { email } });
+    const ismatch = await checkPassword(password, user.password);
 
-    if (!user) {
+    if (!user || !ismatch) {
         return res.status(401).json({
             ok: true,
             msg: 'The credentials are incorrect',

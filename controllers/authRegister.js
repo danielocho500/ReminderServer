@@ -1,3 +1,4 @@
+const { createUser } = require('../database/user/createUser');
 const { emailExists } = require('../database/user/emailExists');
 const { verifyConnection } = require('../database/verifyConnection');
 const { getRequestData } = require('../helpers/getRequestData');
@@ -33,7 +34,9 @@ const authRegister = async (req, res) => {
     }
 
     try {
-        const token = await generateJWT(email, userAgent, userIp);
+        const user = await createUser(password, email);
+
+        const token = await generateJWT(user.uid, userAgent, userIp);
         res.set('authToken', token);
 
         return res.status(200).json({
@@ -42,7 +45,8 @@ const authRegister = async (req, res) => {
                 registered: true,
             },
         });
-    } catch {
+    } catch (err) {
+        console.log(err);
         return res.status(500).json({
             ok: false,
             msg: 'internal server error',

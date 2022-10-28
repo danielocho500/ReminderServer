@@ -2,7 +2,9 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { authLogin } = require('../controllers/authLogin');
 const { authRegister } = require('../controllers/authRegister');
+const { registerData } = require('../controllers/registerData');
 const { validateParams } = require('../helpers/validateParams');
+const { validateJWT } = require('../jwt/validateJWT');
 
 const router = Router();
 router.post('/login', [
@@ -22,5 +24,15 @@ router.post('/register', [
     }),
     validateParams,
 ], authRegister);
+
+router.post('/registerdata', [
+    check('username', 'You should include a username').notEmpty(),
+    check('weight', 'You should include a valid weight').notEmpty().isNumeric(),
+    check('height', 'You should include a valid weight').notEmpty().isNumeric(),
+    check('genre', 'You should include a valid genre').notEmpty(),
+    check('activity', 'You should include a valid activy frecuency').notEmpty().isNumeric(),
+    validateParams,
+    validateJWT,
+], registerData);
 
 module.exports = router;

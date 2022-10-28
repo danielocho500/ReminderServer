@@ -14,13 +14,18 @@ const validateJWT = async (req, res, next) => {
     }
 
     try {
-        // eslint-disable-next-line no-unused-vars
-        const { userAgentToken, userIpToken } = jwt.verify(token, process.env.SECRET_KEY);
+        // eslint-disable-next-line no-unused-vars, max-len
+        const { userAgent: userAgentToken, userIp: userIpToken } = jwt.verify(token, process.env.SECRET_KEY);
 
         const { userAgent, userIp } = getRequestData(req);
 
         if (userAgent === userAgentToken && userIp === userIpToken) {
             next();
+        } else {
+            return res.status(401).json({
+                ok: false,
+                msg: 'invalid token',
+            });
         }
     } catch (err) {
         return res.status(401).json({
