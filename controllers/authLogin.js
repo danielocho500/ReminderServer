@@ -37,7 +37,6 @@ const authLogin = async (req, res) => {
 
     try {
         const token = await generateJWT(user.uid, userAgent, userIp);
-        res.set('authToken', token);
 
         return res.status(200).json({
             ok: true,
@@ -46,6 +45,7 @@ const authLogin = async (req, res) => {
                 isregistered: user.isregistered,
                 logged: true,
             },
+            token,
         });
     } catch {
         return res.status(500).json({

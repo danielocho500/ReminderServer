@@ -7,8 +7,7 @@ const { generateJWT } = require('../jwt/generateJWT');
 /* eslint-disable no-console */
 const authRegister = async (req, res) => {
     console.log('POST register');
-
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
     const { userAgent, userIp } = getRequestData(req);
 
     const isConnected = await verifyConnection();
@@ -34,16 +33,16 @@ const authRegister = async (req, res) => {
     }
 
     try {
-        const user = await createUser(password, email);
+        const user = await createUser(password, email, username);
 
         const token = await generateJWT(user.uid, userAgent, userIp);
-        res.set('authToken', token);
 
         return res.status(200).json({
             ok: true,
             data: {
                 registered: true,
             },
+            token,
         });
     } catch (err) {
         console.log(err);

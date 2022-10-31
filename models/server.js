@@ -12,7 +12,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 8080;
         this.home = '';
+
         this.authPath = '/api/auth';
+        this.userPath = '/api/user';
 
         this.middlewares();
 
@@ -28,6 +30,7 @@ class Server {
 
     routes() {
         this.app.use(this.authPath, require('../routes/auth'));
+        this.app.use(this.userPath, require('../routes/user'));
     }
 
     listen() {

@@ -15,6 +15,7 @@ router.post('/login', [
 
 router.post('/register', [
     check('email', 'You should include a valid email').isEmail().notEmpty(),
+    check('username', 'You should include a username').notEmpty(),
     check('password', 'You should include a password').notEmpty(),
     check('password', 'The password is not secure').isStrongPassword({
         minLength: 8,
@@ -26,7 +27,6 @@ router.post('/register', [
 ], authRegister);
 
 router.post('/registerdata', [
-    check('username', 'You should include a username').notEmpty(),
     check('weight', 'You should include a valid weight').notEmpty().isNumeric(),
     check('height', 'You should include a valid weight').notEmpty().isNumeric(),
     check('genre', 'You should include a valid genre').notEmpty(),

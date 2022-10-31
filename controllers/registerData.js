@@ -9,7 +9,6 @@ const registerData = async (req, res) => {
     const uid = getUidByToken(req.headers.authtoken);
 
     const {
-        username,
         weight,
         height,
         genre,
@@ -36,7 +35,6 @@ const registerData = async (req, res) => {
 
         await UserData.create({
             uid,
-            username,
             weight,
             height,
             genre,

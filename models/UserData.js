@@ -19,10 +19,6 @@ const UserData = sequelize.define('UserDatas', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     activity: {
         type: DataTypes.INTEGER,
         allowNull: false,
