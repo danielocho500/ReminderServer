@@ -25,7 +25,12 @@ const Reminder = sequelize.define('Reminder', {
     },
     repetitions: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
+    },
+    isActive: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: 1,
     },
 });
 

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 const { verifyConnection } = require('../../database/verifyConnection');
 const { checkHourValid } = require('../../helpers/checkHourValid');
@@ -6,8 +7,8 @@ const { responseServerError } = require('../../helpers/responseServerError');
 const { getUidByToken } = require('../../jwt/getUidByToken');
 const Reminder = require('../../models/Reminder');
 
-const createReminder = async (req, res) => {
-    console.log('POST reminder');
+const updateReminder = async (req, res) => {
+    console.log('PUT reminder');
 
     const {
         name,
@@ -16,11 +17,12 @@ const createReminder = async (req, res) => {
         repetitions,
     } = req.body;
 
-    const uid = getUidByToken(req.headers.authtoken);
-
     if (!checkHourValid(hourBegin, hourEnd)) {
         return responseMsg(res, 400, true, 'The hour End should be an hour after the hour begin at least', {});
     }
+
+    const { idReminder } = req.params;
+    const uid = getUidByToken(req.headers.authtoken);
 
     const isConnected = await verifyConnection();
     if (!isConnected) {
@@ -28,23 +30,30 @@ const createReminder = async (req, res) => {
     }
 
     try {
-        await Reminder.create({
-            uid,
+        const reminder = await Reminder.findOne({
+            where: {
+                uid,
+                id: idReminder,
+            },
+        });
+
+        if (!reminder) {
+            return responseMsg(res, 404, true, 'Reminder not found', {});
+        }
+
+        reminder.update({
             name,
             hourBegin,
             hourEnd,
             repetitions,
         });
 
-        return responseMsg(res, 200, true, {
-            created: true,
-        });
-    } catch (err) {
-        console.log(err);
+        return responseMsg(res, 200, true, 'updated', {});
+    } catch {
         return responseServerError(res);
     }
 };
 
 module.exports = {
-    createReminder,
+    updateReminder,
 };

@@ -2,7 +2,45 @@ DROP DATABASE IF EXISTS `reminder`;
 CREATE DATABASE `reminder`;
 USE reminder;
 
-DROP TABLE IF EXISTS `Days`;
+CREATE TABLE `Users` (
+  `uid` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `emailconfirmed` int NOT NULL,
+  `isregistered` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `UserDatas` (
+  `uid` varchar(100) NOT NULL,
+  `weight` int NOT NULL,
+  `height` int NOT NULL,
+  `genre` varchar(1) NOT NULL,
+  `activity` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  KEY `uid` (`uid`),
+  CONSTRAINT `UserDatas_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Reminders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `hourBegin` time NOT NULL,
+  `hourEnd` time NOT NULL,
+  `repetitions` int NOT NULL,
+  `isActive` tinyint NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  CONSTRAINT `Reminders_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `Days` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -11,7 +49,6 @@ CREATE TABLE `Days` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `ReminderDays`;
 CREATE TABLE `ReminderDays` (
   `id` int NOT NULL AUTO_INCREMENT,
   `dayID` int NOT NULL,
@@ -25,7 +62,6 @@ CREATE TABLE `ReminderDays` (
   CONSTRAINT `ReminderDays_ibfk_2` FOREIGN KEY (`reminderId`) REFERENCES `Reminders` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `ReminderWaters`;
 CREATE TABLE `ReminderWaters` (
   `id` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) NOT NULL,
@@ -39,48 +75,6 @@ CREATE TABLE `ReminderWaters` (
   CONSTRAINT `ReminderWaters_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `Reminders`;
-CREATE TABLE `Reminders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `hourBegin` time NOT NULL,
-  `hourEnd` time NOT NULL,
-  `repetitions` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  CONSTRAINT `Reminders_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `UserDatas`;
-CREATE TABLE `UserDatas` (
-  `uid` varchar(100) NOT NULL,
-  `weight` int NOT NULL,
-  `height` int NOT NULL,
-  `genre` varchar(1) NOT NULL,
-  `activity` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  KEY `uid` (`uid`),
-  CONSTRAINT `UserDatas_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `Users`;
-CREATE TABLE `Users` (
-  `uid` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `emailconfirmed` int NOT NULL,
-  `isregistered` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `WaterDays`;
 CREATE TABLE `WaterDays` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idReminder` int NOT NULL,
