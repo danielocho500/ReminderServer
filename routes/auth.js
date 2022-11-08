@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { authLogin } = require('../controllers/authLogin');
-const { authRegister } = require('../controllers/authRegister');
-const { registerData } = require('../controllers/registerData');
+const { authLogin } = require('../controllers/auth/authLogin');
+const { authRegister } = require('../controllers/auth/authRegister');
+const { registerData } = require('../controllers/auth/registerData');
 const { validateParams } = require('../helpers/validateParams');
 const { validateJWT } = require('../jwt/validateJWT');
 

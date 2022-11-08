@@ -4,7 +4,7 @@ const { sequelize } = require('../database/connection');
 const ReminderWater = sequelize.define('ReminderWater', {
     id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
     },
     uid: {

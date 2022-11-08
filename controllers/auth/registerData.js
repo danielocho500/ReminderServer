@@ -1,7 +1,10 @@
-const { verifyConnection } = require('../database/verifyConnection');
-const { getUidByToken } = require('../jwt/getUidByToken');
-const User = require('../models/User');
-const UserData = require('../models/UserData');
+const { verifyConnection } = require('../../database/verifyConnection');
+const { responseMsg } = require('../../helpers/responseMsg');
+const { responseServerError } = require('../../helpers/responseServerError');
+const { getUidByToken } = require('../../jwt/getUidByToken');
+const ReminderWater = require('../../models/ReminderWater');
+const User = require('../../models/User');
+const UserData = require('../../models/UserData');
 /* eslint-disable no-console */
 const registerData = async (req, res) => {
     console.log('POST register data');
@@ -17,20 +20,14 @@ const registerData = async (req, res) => {
 
     const isConnected = await verifyConnection();
     if (!isConnected) {
-        return res.status(500).json({
-            ok: false,
-            msg: 'internal server error',
-        });
+        return responseServerError(res);
     }
 
     try {
         const uidExists = await UserData.findOne({ where: { uid } });
 
         if (uidExists) {
-            return res.status(500).json({
-                ok: false,
-                msg: 'User data already registered',
-            });
+            return responseMsg(res, 401, true, 'No valid user', {});
         }
 
         await UserData.create({
@@ -46,18 +43,17 @@ const registerData = async (req, res) => {
             { where: { uid } },
         );
 
-        return res.status(200).json({
-            ok: true,
+        await ReminderWater.create({
+            uid,
+            hourBegin: '09:00',
+            hourEnd: '21:00',
+            amount: 2500,
         });
+
+        return responseMsg(res, 200, true, 'Data registered', {});
     } catch (err) {
         console.log(err);
-        return res.status(500).json({
-            ok: false,
-            msg: 'internal server error',
-            data: {
-                registered: false,
-            },
-        });
+        return responseServerError(res);
     }
 };
 

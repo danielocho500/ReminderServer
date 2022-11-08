@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 /* eslint-disable global-require */
 /* eslint-disable no-unused-vars */
@@ -15,6 +17,8 @@ class Server {
 
         this.authPath = '/api/auth';
         this.userPath = '/api/user';
+        this.waterPath = '/api/water';
+        this.remindersPath = '/api/reminder';
 
         this.middlewares();
 
@@ -31,6 +35,8 @@ class Server {
     routes() {
         this.app.use(this.authPath, require('../routes/auth'));
         this.app.use(this.userPath, require('../routes/user'));
+        this.app.use(this.waterPath, require('../routes/water'));
+        this.app.use(this.remindersPath, require('../routes/reminder'));
     }
 
     listen() {

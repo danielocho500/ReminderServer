@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getUserInfo } = require('../controllers/user/getUserInfo');
+const { getWaterToday } = require('../controllers/water/getWaterToday');
 const { validateParams } = require('../helpers/validateParams');
 const { validateJWT } = require('../jwt/validateJWT');
 
@@ -8,6 +8,6 @@ const router = Router();
 router.get('/', [
     validateParams,
     validateJWT,
-], getUserInfo);
+], getWaterToday);
 
 module.exports = router;

@@ -4,8 +4,8 @@ const { sequelize } = require('../database/connection');
 const Reminder = sequelize.define('Reminder', {
     id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
     },
     uid: {
         type: DataTypes.STRING,
