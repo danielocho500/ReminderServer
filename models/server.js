@@ -19,6 +19,7 @@ class Server {
         this.userPath = '/api/user';
         this.waterPath = '/api/water';
         this.remindersPath = '/api/reminder';
+        this.emailPath = '/api/email';
 
         this.middlewares();
 
@@ -37,6 +38,7 @@ class Server {
         this.app.use(this.userPath, require('../routes/user'));
         this.app.use(this.waterPath, require('../routes/water'));
         this.app.use(this.remindersPath, require('../routes/reminder'));
+        this.app.use(this.emailPath, require('../routes/email'));
     }
 
     listen() {
