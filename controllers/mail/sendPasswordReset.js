@@ -39,7 +39,7 @@ const sendPasswordReset = async (req, res) => {
 
         await transporter.sendMail({
             from: '"LyfeStyle Reminder" <lifermder@gmail.com>', // sender address
-            to: 'danielnochess@gmail.com', // list of receivers
+            to: email, // list of receivers
             subject: 'Change the password', // Subject line
             html: `
             <!DOCTYPE html>
@@ -259,7 +259,7 @@ const sendPasswordReset = async (req, res) => {
             `,
         });
 
-        responseMsg(res, 200, true, 'Email Sended!', {});
+        responseMsg(res, 200, true, 'Email Sended! if account exist', {});
     } catch (err) {
         console.log(err);
         return responseServerError(res);
