@@ -7,7 +7,7 @@ const Pin = sequelize.define('Pin', {
         primaryKey: true,
         autoIncrement: true,
     },
-    uid: {
+    email: {
         type: DataTypes.STRING,
         allowNull: false,
     },

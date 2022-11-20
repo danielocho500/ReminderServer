@@ -43,7 +43,7 @@ const mailConfirmation = async (req, res) => {
     await transporter.sendMail({
         from: '"LyfeStyle Reminder" <lifermder@gmail.com>', // sender address
         to: 'danielnochess@gmail.com', // list of receivers
-        subject: 'Confirmación cuenta LifeReminder', // Subject line
+        subject: 'Confirm Life Reminder Account', // Subject line
         html: `
         <!DOCTYPE html>
         <html>
