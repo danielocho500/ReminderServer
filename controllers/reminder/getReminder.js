@@ -33,13 +33,13 @@ const getReminder = async (req, res) => {
         name,
         hourBegin,
         hourEnd,
-        repetitions,
+        minutesLapse,
         createdAt,
         updatedAt,
     } = reminder;
 
     return responseMsg(res, 200, true, '', {
-        name, hourBegin, hourEnd, repetitions, createdAt, updatedAt,
+        name, hourBegin, hourEnd, minutesLapse, createdAt, updatedAt,
     });
 };
 

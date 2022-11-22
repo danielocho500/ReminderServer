@@ -27,7 +27,7 @@ const getReminders = async (req, res) => {
         name: reminder.dataValues.name,
         hourBegin: reminder.dataValues.hourBegin,
         hourEnd: reminder.dataValues.hourEnd,
-        repetitions: reminder.dataValues.repetitions,
+        minutesLapse: reminder.dataValues.minutesLapse,
         updatedAt: reminder.dataValues.updatedAt,
         createdAt: reminder.dataValues.createdAt,
     }));

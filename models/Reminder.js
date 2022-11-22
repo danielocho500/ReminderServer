@@ -23,7 +23,7 @@ const Reminder = sequelize.define('Reminder', {
         type: DataTypes.TIME,
         allowNull: false,
     },
-    repetitions: {
+    minutesLapse: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },

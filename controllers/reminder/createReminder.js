@@ -13,7 +13,7 @@ const createReminder = async (req, res) => {
         name,
         hourBegin,
         hourEnd,
-        repetitions,
+        minutesLapse,
     } = req.body;
 
     const uid = getUidByToken(req.headers.authtoken);
@@ -33,7 +33,7 @@ const createReminder = async (req, res) => {
             name,
             hourBegin,
             hourEnd,
-            repetitions,
+            minutesLapse,
         });
 
         return responseMsg(res, 200, true, {

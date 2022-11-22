@@ -32,7 +32,7 @@ CREATE TABLE `Reminders` (
   `name` varchar(255) NOT NULL,
   `hourBegin` time NOT NULL,
   `hourEnd` time NOT NULL,
-  `repetitions` int NOT NULL,
+  `minutesLapse` int NOT NULL,
   `isActive` tinyint NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
@@ -103,3 +103,15 @@ CREATE TABLE `Pins` (
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `Contacts`(
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+)

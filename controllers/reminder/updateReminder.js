@@ -14,7 +14,7 @@ const updateReminder = async (req, res) => {
         name,
         hourBegin,
         hourEnd,
-        repetitions,
+        minutesLapse,
     } = req.body;
 
     if (!checkHourValid(hourBegin, hourEnd)) {
@@ -45,7 +45,7 @@ const updateReminder = async (req, res) => {
             name,
             hourBegin,
             hourEnd,
-            repetitions,
+            minutesLapse,
         });
 
         return responseMsg(res, 200, true, 'updated', {});
