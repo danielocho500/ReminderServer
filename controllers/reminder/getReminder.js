@@ -9,6 +9,8 @@ const Reminder = require('../../models/Reminder');
 const getReminder = async (req, res) => {
     console.log('GET reminder');
 
+    const url = 'https://res.cloudinary.com/dnircoans/image/upload/v1669158300/reminders/download_xjavgb.jpg';
+
     const { idReminder } = req.params;
     const uid = getUidByToken(req.headers.authtoken);
 
@@ -39,7 +41,7 @@ const getReminder = async (req, res) => {
     } = reminder;
 
     return responseMsg(res, 200, true, '', {
-        name, hourBegin, hourEnd, minutesLapse, createdAt, updatedAt,
+        name, hourBegin, hourEnd, minutesLapse, createdAt, updatedAt, url,
     });
 };
 

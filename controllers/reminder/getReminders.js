@@ -9,6 +9,8 @@ const Reminder = require('../../models/Reminder');
 const getReminders = async (req, res) => {
     console.log('GET reminders');
 
+    const url = 'https://res.cloudinary.com/dnircoans/image/upload/v1669158300/reminders/download_xjavgb.jpg';
+
     const isConnected = await verifyConnection();
     if (!isConnected) {
         return responseServerError(res);
@@ -30,6 +32,7 @@ const getReminders = async (req, res) => {
         minutesLapse: reminder.dataValues.minutesLapse,
         updatedAt: reminder.dataValues.updatedAt,
         createdAt: reminder.dataValues.createdAt,
+        url,
     }));
 
     return responseMsg(res, 200, true, '', {
