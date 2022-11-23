@@ -14,7 +14,10 @@ const createReminder = async (req, res) => {
         hourBegin,
         hourEnd,
         minutesLapse,
+        image,
     } = req.body;
+
+    if (image > 3 || image < 0) return responseMsg(res, 400, true, 'debes inlcuir un id de imagen valida', {});
 
     const uid = getUidByToken(req.headers.authtoken);
 
@@ -34,6 +37,7 @@ const createReminder = async (req, res) => {
             hourBegin,
             hourEnd,
             minutesLapse,
+            image,
         });
 
         return responseMsg(res, 200, true, {

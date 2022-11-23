@@ -20,6 +20,7 @@ router.post('/', [
     check('hourBegin', 'You should include a hourBegin in the format HH:MM').notEmpty().matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
     check('hourEnd', 'You should include a hourEnd in the format HH:MM').notEmpty().matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
     check('minutesLapse', 'You should include the minutes lapse').notEmpty().isNumeric(),
+    check('image', 'you should send the image id').notEmpty(),
     validateParams,
     validateJWT,
 ], createReminder);
@@ -36,6 +37,7 @@ router.put('/:idReminder', [
     check('hourBegin', 'You should include a hourBegin in the format HH:MM').notEmpty().matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
     check('hourEnd', 'You should include a hourEnd in the format HH:MM').notEmpty().matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
     check('minutesLapse', 'You should include the number of minutes lapse').notEmpty().isNumeric(),
+    check('image', 'you should send the image id').notEmpty(),
     validateParams,
     validateJWT,
 ], updateReminder);

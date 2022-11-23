@@ -1,15 +1,18 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable consistent-return */
 const { verifyConnection } = require('../../database/verifyConnection');
 const { responseMsg } = require('../../helpers/responseMsg');
 const { responseServerError } = require('../../helpers/responseServerError');
 const { getUidByToken } = require('../../jwt/getUidByToken');
+const Image = require('../../models/Image');
 const Reminder = require('../../models/Reminder');
 
 /* eslint-disable no-console */
 const getReminders = async (req, res) => {
     console.log('GET reminders');
-
-    const url = 'https://res.cloudinary.com/dnircoans/image/upload/v1669158300/reminders/download_xjavgb.jpg';
 
     const isConnected = await verifyConnection();
     if (!isConnected) {
@@ -24,16 +27,29 @@ const getReminders = async (req, res) => {
         },
     });
 
-    const data = reminders.map((reminder) => ({
-        id: reminder.dataValues.id,
-        name: reminder.dataValues.name,
-        hourBegin: reminder.dataValues.hourBegin,
-        hourEnd: reminder.dataValues.hourEnd,
-        minutesLapse: reminder.dataValues.minutesLapse,
-        updatedAt: reminder.dataValues.updatedAt,
-        createdAt: reminder.dataValues.createdAt,
-        url,
-    }));
+    const data = [];
+
+    let i = 0;
+    while (i < reminders.length) {
+        const { url } = await Image.findOne({
+            where: {
+                id: reminders[i].image,
+            },
+        });
+
+        data.push({
+            id: reminders[i].dataValues.id,
+            name: reminders[i].dataValues.name,
+            hourBegin: reminders[i].dataValues.hourBegin,
+            hourEnd: reminders[i].dataValues.hourEnd,
+            minutesLapse: reminders[i].dataValues.minutesLapse,
+            updatedAt: reminders[i].dataValues.updatedAt,
+            createdAt: reminders[i].dataValues.createdAt,
+            url,
+        });
+
+        i++;
+    }
 
     return responseMsg(res, 200, true, '', {
         reminders: data,

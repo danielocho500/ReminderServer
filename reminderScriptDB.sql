@@ -26,6 +26,19 @@ CREATE TABLE `UserDatas` (
   CONSTRAINT `UserDatas_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE `images`(
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `url` varchar(510) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+insert into images (name, url, createdAt, updatedAt) Values ('reloj', 'https://cdn-icons-png.flaticon.com/512/3073/3073471.png', NOW(), NOW());
+insert into images (name, url, createdAt, updatedAt) Values ('agua', 'https://cdn-icons-png.flaticon.com/512/3248/3248369.png', NOW(), NOW());
+insert into images (name, url, createdAt, updatedAt) Values ('actividad', 'https://cdn-icons-png.flaticon.com/512/983/983544.png', NOW(), NOW());
+
 CREATE TABLE `Reminders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) NOT NULL,
@@ -33,12 +46,13 @@ CREATE TABLE `Reminders` (
   `hourBegin` time NOT NULL,
   `hourEnd` time NOT NULL,
   `minutesLapse` int NOT NULL,
+  `image` int NOT NULL,
   `isActive` tinyint NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  CONSTRAINT `Reminders_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+  CONSTRAINT `Reminders_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`),
+  CONSTRAINT `Reminders_ibfk_2` FOREIGN KEY (`image`) REFERENCES `Images` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `Days` (
@@ -104,7 +118,6 @@ CREATE TABLE `Pins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
 CREATE TABLE `Contacts`(
   `id` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
@@ -114,4 +127,4 @@ CREATE TABLE `Contacts`(
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-)
+);

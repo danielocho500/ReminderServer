@@ -21,6 +21,7 @@ class Server {
         this.remindersPath = '/api/reminder';
         this.emailPath = '/api/email';
         this.contactPath = '/api/contact';
+        this.imagePath = '/api/images';
 
         this.middlewares();
 
@@ -41,6 +42,7 @@ class Server {
         this.app.use(this.remindersPath, require('../routes/reminder'));
         this.app.use(this.emailPath, require('../routes/email'));
         this.app.use(this.contactPath, require('../routes/contact'));
+        this.app.use(this.imagePath, require('../routes/image'));
     }
 
     listen() {

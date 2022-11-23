@@ -27,6 +27,10 @@ const Reminder = sequelize.define('Reminder', {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
+    image: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
     isActive: {
         type: DataTypes.TINYINT,
         allowNull: true,
