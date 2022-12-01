@@ -48,7 +48,7 @@ const getReminder = async (req, res) => {
     });
 
     return responseMsg(res, 200, true, '', {
-        name, hourBegin, hourEnd, minutesLapse, createdAt, updatedAt, url,
+        name, hourBegin, hourEnd, minutesLapse, createdAt, updatedAt, url, image,
     });
 };
 

@@ -46,6 +46,7 @@ const getReminders = async (req, res) => {
             updatedAt: reminders[i].dataValues.updatedAt,
             createdAt: reminders[i].dataValues.createdAt,
             url,
+            image: reminders[i].dataValues.image,
         });
 
         i++;
