@@ -39,7 +39,6 @@ const getReminder = async (req, res) => {
         updatedAt,
         image,
     } = reminder;
-    console.log(image);
 
     const { url } = await Image.findOne({
         where: {

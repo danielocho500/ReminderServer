@@ -128,3 +128,15 @@ CREATE TABLE `Contacts`(
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `Todos`(
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `endDate` datetime NOT NULL,
+  `completed` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+);

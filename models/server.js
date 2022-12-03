@@ -22,6 +22,7 @@ class Server {
         this.emailPath = '/api/email';
         this.contactPath = '/api/contact';
         this.imagePath = '/api/images';
+        this.todoPath = '/api/todo';
 
         this.middlewares();
 
@@ -43,6 +44,7 @@ class Server {
         this.app.use(this.emailPath, require('../routes/email'));
         this.app.use(this.contactPath, require('../routes/contact'));
         this.app.use(this.imagePath, require('../routes/image'));
+        this.app.use(this.todoPath, require('../routes/todo'));
     }
 
     listen() {
