@@ -20,7 +20,7 @@ const getTodos = async (req, res) => {
     const todosActive = await Todo.findAll({
         where: {
             uid,
-            completed: 0,
+            isActive: 1,
         },
         order: [
             ['endDate', 'ASC'],
@@ -29,20 +29,16 @@ const getTodos = async (req, res) => {
 
     const actives = todosActive.map((todo) => {
         const {
-            id, description, endDate, completed,
+            id, description, endDate,
         } = todo.dataValues;
         const date = new Date(endDate).getTime();
 
         const expired = (date <= Date.now());
 
-        console.log(date);
-        console.log(Date.now());
-
         return {
             id,
             description,
             endDate: date,
-            completed,
             expired,
         };
     });

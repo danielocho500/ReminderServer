@@ -134,7 +134,7 @@ CREATE TABLE `Todos`(
   `uid` varchar(100) NOT NULL,
   `description` varchar(255) NOT NULL,
   `endDate` datetime NOT NULL,
-  `completed` int NOT NULL,
+  `isActive` int NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),

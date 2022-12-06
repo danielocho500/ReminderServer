@@ -21,6 +21,7 @@ const getTodo = async (req, res) => {
         where: {
             uid,
             id: idTodo,
+            isActive: 1,
         },
     });
 
@@ -28,11 +29,11 @@ const getTodo = async (req, res) => {
         return responseMsg(res, 404, true, 'todo not found', {});
     }
 
-    const { description, endDate, completed } = todo;
+    const { description, endDate } = todo;
 
     const date = new Date(endDate).getTime();
 
-    return responseMsg(res, 200, true, '', { description, endDate: date, completed });
+    return responseMsg(res, 200, true, '', { description, endDate: date });
 };
 
 module.exports = {

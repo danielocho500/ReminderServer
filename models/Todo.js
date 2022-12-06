@@ -19,10 +19,10 @@ const Todo = sequelize.define('Todo', {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    completed: {
+    isActive: {
         type: DataTypes.TINYINT,
         allowNull: true,
-        defaultValue: 0,
+        defaultValue: 1,
     },
 });
 
