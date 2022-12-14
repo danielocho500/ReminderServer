@@ -153,3 +153,34 @@ CREATE TABLE Stats(
     foreign key(idReminder) references reminders(id),
     foreign key(uid) references Users(uid)
 );
+
+INSERT INTO USERS (uid, password, username, email,emailconfirmed, isregistered, createdAt, updatedAt) VALUES ('133cb386-1b97-4636-910c-d066d8d825f7', '$2b$10$pb3Sqa9xXxF8orACUEqMOO2nAUg6kLWuDVJy8fWty5fcjDvdQ/Ddy', 'manu', 'danielnochess@gmail.com', '1', '1', NOW(), NOW());
+INSERT INTO UserDatas (uid,weight,height,genre,activity,createdAt,updatedAt) VALUES ('133cb386-1b97-4636-910c-d066d8d825f7', '80', '180', 'M', '3', NOW(), NOW());
+INSERT INTO Reminders (id,uid,name,hourBegin,hourEnd,minutesLapse,image,isActive, createdAt, updatedAt) VALUES (1, '133cb386-1b97-4636-910c-d066d8d825f7', 'Estirar ', '13:00:00', '15:10:00', '30', '2', '1', '2022-11-12 08:12:20', '2022-9-12 08:12:20');
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 4, '2022-11-10', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 3, '2022-11-11', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-11-12', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-13', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-14', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-11-17', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 3, '2022-11-18', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 4, '2022-11-21', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-22', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-11-23', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 3, '2022-11-24', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-27', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-28', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-11-29', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-11-30', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 3, '2022-12-2', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 4, '2022-12-3', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-12-4', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 4, '2022-12-10', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-12-11', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-12-12', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 2, '2022-12-13', NOW(), NOW());
+INSERT INTO Stats (uid, idReminder, meta, aceptadas, fecha, createdAt, updatedAt) Values ('133cb386-1b97-4636-910c-d066d8d825f7',1, 4, 1, '2022-12-14', NOW(), NOW());
+
+
+INSERT INTO Reminders (id,uid,name,hourBegin,hourEnd,minutesLapse,image,isActive, createdAt, updatedAt) VALUES (2, '133cb386-1b97-4636-910c-d066d8d825f7', 'Arrglar postura', '12:00:00', '16:10:00', '20', '3', '1', NOW(), NOW());
+
