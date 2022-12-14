@@ -26,6 +26,7 @@ const mailConfirmation = async (req, res) => {
 
   try {
     const user = await User.findOne({ where: { uid } });
+    console.log(user);
     if (user.dataValues.emailconfirmed === 1) {
       return responseMsg(res, 400, true, 'the email is already validate', {});
     }
@@ -37,6 +38,7 @@ const mailConfirmation = async (req, res) => {
 
     await Pin.create({
       email: user.dataValues.email,
+      uid,
       value: valuePin,
     });
 
