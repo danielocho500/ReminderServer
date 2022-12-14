@@ -36,8 +36,6 @@ const getRemindersHours = async (req, res) => {
         const lapse = end - begin;
         const rings = Math.floor(lapse / loop);
 
-        console.log(rings, loop, begin);
-
         for (let i = 0; i < rings; i++) {
             const seconds = begin + (loop * i);
             for (let j = 0; j < data.length; j++) {
@@ -63,8 +61,6 @@ const getRemindersHours = async (req, res) => {
             }
         }
     });
-
-    console.log(data);
 
     return responseMsg(res, 200, true, '', {
         reminders: data,

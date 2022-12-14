@@ -91,6 +91,7 @@ const getStat = async (req, res) => {
             haveStats: true,
             porcentage,
             accepted,
+            goal: totalGoal,
         };
     }
     // 3 months
@@ -119,6 +120,7 @@ const getStat = async (req, res) => {
             haveStats: true,
             porcentage,
             accepted,
+            goal: totalGoal,
         };
     }
 

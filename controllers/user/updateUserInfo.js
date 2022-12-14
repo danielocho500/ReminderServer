@@ -33,8 +33,6 @@ const updateUserInfo = async (req, res) => {
         return responseMsg(res, 400, true, 'There are not user data registered', {});
     }
 
-    console.log(data);
-
     await data.update({
         weight,
         height,
