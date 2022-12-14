@@ -3,7 +3,7 @@ const getNumberRings = (hourBegin, hourEnd, minutesLapse) => {
     const secondsEnd = parseInt((hourEnd.split(':')[0] * 3600), 10) + parseInt((hourEnd.split(':')[1] * 60), 10) + parseInt((hourEnd.split(':')[2]), 10);
     const totalSeconds = secondsEnd - secondsBegin;
 
-    return totalSeconds / (minutesLapse * 60);
+    return Math.floor(totalSeconds / (minutesLapse * 60));
 };
 
 module.exports = {

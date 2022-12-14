@@ -3,7 +3,7 @@
 const { QueryTypes } = require('sequelize');
 const { sequelize } = require('../../database/connection');
 const { verifyConnection } = require('../../database/verifyConnection');
-const { getDateToday } = require('../../helpers/dateToday');
+const { getDateToday } = require('../../helpers/dates');
 const { getNumberRings } = require('../../helpers/getNumberRings');
 const { responseMsg } = require('../../helpers/responseMsg');
 const { responseServerError } = require('../../helpers/responseServerError');
@@ -36,14 +36,13 @@ const pushStat = async (req, res) => {
 
     const statFind = await sequelize.query(`SELECT * FROM stats WHERE fecha = '${getDateToday()}' AND uid = '${uid}' AND idReminder = '${idReminder}';`, { type: QueryTypes.SELECT });
 
-    console.log(statFind);
-
     if (statFind.length === 0) {
         const { hourBegin, hourEnd, minutesLapse } = reminder;
         const meta = getNumberRings(hourBegin, hourEnd, minutesLapse);
 
         await Stat.create({
             idReminder,
+            uid,
             meta,
             aceptadas: 1,
             fecha: getDateToday(),
@@ -56,6 +55,9 @@ const pushStat = async (req, res) => {
             },
         });
 
+        if (stat.dataValues.aceptadas >= stat.dataValues.meta) {
+            return responseMsg(res, 200, true, 'updated', {});
+        }
         await stat.update({
             aceptadas: stat.dataValues.aceptadas + 1,
         });
