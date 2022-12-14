@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
+const { QueryTypes } = require('sequelize');
+const { sequelize } = require('../../database/connection');
 const { verifyConnection } = require('../../database/verifyConnection');
 const { getDateToday } = require('../../helpers/dateToday');
 const { getNumberRings } = require('../../helpers/getNumberRings');
@@ -32,28 +34,34 @@ const pushStat = async (req, res) => {
         return responseMsg(res, 404, true, 'Reminder not found', {});
     }
 
-    const statFind = await Stat.findOne({
-        where: {
-            idReminder,
-            fecha: new Date(),
-        },
-    });
+    const statFind = await sequelize.query(`SELECT * FROM stats WHERE fecha = '${getDateToday()}' AND uid = '${uid}' AND idReminder = '${idReminder}';`, { type: QueryTypes.SELECT });
 
     console.log(statFind);
 
-    // if (!statFind) {
-    //     const { hourBegin, hourEnd, minutesLapse } = reminder;
-    //     const meta = getNumberRings(hourBegin, hourEnd, minutesLapse);
+    if (statFind.length === 0) {
+        const { hourBegin, hourEnd, minutesLapse } = reminder;
+        const meta = getNumberRings(hourBegin, hourEnd, minutesLapse);
 
-    //     await Stat.create({
-    //         idReminder,
-    //         meta,
-    //         aceptadas: 1,
-    //         fecha: getDateToday(),
-    //     });
-    // }
+        await Stat.create({
+            idReminder,
+            meta,
+            aceptadas: 1,
+            fecha: getDateToday(),
+        });
+    } else {
+        const idStat = statFind[0].id;
+        const stat = await Stat.findOne({
+            where: {
+                id: idStat,
+            },
+        });
 
-    responseMsg(res, 200, true, 'uwu', {});
+        await stat.update({
+            aceptadas: stat.dataValues.aceptadas + 1,
+        });
+    }
+
+    return responseMsg(res, 200, true, 'updated', {});
 };
 
 module.exports = {

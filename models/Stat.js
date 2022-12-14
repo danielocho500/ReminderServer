@@ -7,6 +7,10 @@ const Stat = sequelize.define('Stat', {
         primaryKey: true,
         autoIncrement: 1,
     },
+    uid: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     idReminder: {
         type: DataTypes.INTEGER,
         allowNull: false,
