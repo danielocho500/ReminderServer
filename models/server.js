@@ -23,6 +23,7 @@ class Server {
         this.contactPath = '/api/contact';
         this.imagePath = '/api/images';
         this.todoPath = '/api/todo';
+        this.statPath = '/api/stat';
 
         this.middlewares();
 
@@ -45,6 +46,7 @@ class Server {
         this.app.use(this.contactPath, require('../routes/contact'));
         this.app.use(this.imagePath, require('../routes/image'));
         this.app.use(this.todoPath, require('../routes/todo'));
+        this.app.use(this.statPath, require('../routes/stat'));
     }
 
     listen() {

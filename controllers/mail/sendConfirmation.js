@@ -30,19 +30,19 @@ const mailConfirmation = async (req, res) => {
       return responseMsg(res, 400, true, 'the email is already validate', {});
     }
 
-    const pin = await Pin.findOne({ where: { uid } });
+    const pin = await Pin.findOne({ where: { email: user.dataValues.email } });
     if (pin) {
-      Pin.destroy({ where: { uid } });
+      Pin.destroy({ where: { email: user.dataValues.email } });
     }
 
     await Pin.create({
-      uid,
+      email: user.dataValues.email,
       value: valuePin,
     });
 
     await transporter.sendMail({
         from: '"LyfeStyle Reminder" <lifermder@gmail.com>', // sender address
-        to: 'danielnochess@gmail.com', // list of receivers
+        to: user.dataValues.email, // list of receivers
         subject: 'Confirm Life Reminder Account', // Subject line
         html: `
         <!DOCTYPE html>

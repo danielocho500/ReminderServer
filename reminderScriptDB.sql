@@ -65,14 +65,11 @@ CREATE TABLE `Days` (
 
 CREATE TABLE `ReminderDays` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `dayID` int NOT NULL,
   `reminderId` int NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `dayID` (`dayID`),
   KEY `reminderId` (`reminderId`),
-  CONSTRAINT `ReminderDays_ibfk_1` FOREIGN KEY (`dayID`) REFERENCES `Days` (`id`),
   CONSTRAINT `ReminderDays_ibfk_2` FOREIGN KEY (`reminderId`) REFERENCES `Reminders` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -139,4 +136,16 @@ CREATE TABLE `Todos`(
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+);
+
+CREATE TABLE Stats(
+	id int NOT NULL AUTO_INCREMENT,
+    idReminder int NOT NULL,
+    meta int NOT NULL,
+    aceptadas int NOT NULL,
+    fecha date NOT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (id),
+    foreign key(idReminder) references reminders(id)
 );
