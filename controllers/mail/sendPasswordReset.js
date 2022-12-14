@@ -34,6 +34,7 @@ const sendPasswordReset = async (req, res) => {
 
         await Pin.create({
             email,
+            uid: user.dataValues.uid,
             value: valuePin,
         });
 

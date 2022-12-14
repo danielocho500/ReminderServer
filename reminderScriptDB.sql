@@ -108,11 +108,13 @@ INSERT INTO days (name, createdAt, updatedAt) VALUES ('Sunday', NOW(), NOW());
 
 CREATE TABLE `Pins` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `value` varchar(100) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `Contacts`(
@@ -140,6 +142,7 @@ CREATE TABLE `Todos`(
 
 CREATE TABLE Stats(
 	id int NOT NULL AUTO_INCREMENT,
+    uid varchar(100) NOT NULL,
     idReminder int NOT NULL,
     meta int NOT NULL,
     aceptadas int NOT NULL,
@@ -147,5 +150,6 @@ CREATE TABLE Stats(
     `createdAt` datetime NOT NULL,
     `updatedAt` datetime NOT NULL,
     PRIMARY KEY (id),
-    foreign key(idReminder) references reminders(id)
+    foreign key(idReminder) references reminders(id),
+    foreign key(uid) references Users(uid)
 );
