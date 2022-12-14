@@ -114,8 +114,8 @@ CREATE TABLE `Pins` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+);
 
 CREATE TABLE `Contacts`(
   `id` int NOT NULL AUTO_INCREMENT,
@@ -137,7 +137,7 @@ CREATE TABLE `Todos`(
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `Todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
+  CONSTRAINT `Todo_ibfk_6` FOREIGN KEY (`uid`) REFERENCES `Users` (`uid`)
 );
 
 CREATE TABLE Stats(
