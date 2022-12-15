@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../database/connection');
+const { seqTodo } = require('../database/connection');
 
-const Todo = sequelize.define('Todo', {
+const Todo = seqTodo.define('Todo', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

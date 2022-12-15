@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../database/connection');
+const { seqReminder } = require('../database/connection');
 
-const Reminder = sequelize.define('Reminder', {
+const Reminder = seqReminder.define('Reminder', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

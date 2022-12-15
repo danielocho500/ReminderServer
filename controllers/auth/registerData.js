@@ -2,7 +2,6 @@ const { verifyConnection } = require('../../database/verifyConnection');
 const { responseMsg } = require('../../helpers/responseMsg');
 const { responseServerError } = require('../../helpers/responseServerError');
 const { getUidByToken } = require('../../jwt/getUidByToken');
-const ReminderWater = require('../../models/ReminderWater');
 const User = require('../../models/User');
 const UserData = require('../../models/UserData');
 /* eslint-disable no-console */
@@ -42,13 +41,6 @@ const registerData = async (req, res) => {
             { isregistered: 1 },
             { where: { uid } },
         );
-
-        await ReminderWater.create({
-            uid,
-            hourBegin: '09:00',
-            hourEnd: '21:00',
-            amount: 2500,
-        });
 
         return responseMsg(res, 200, true, 'Data registered', {});
     } catch (err) {

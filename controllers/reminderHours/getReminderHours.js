@@ -42,12 +42,14 @@ const getRemindersHours = async (req, res) => {
                 if (seconds < data[j].seconds) {
                     data.splice(j, 0, {
                         idReminder: reminder.getDataValue('id'),
+                        name: reminder.getDataValue('name'),
                         seconds,
                     });
                     j = data.length;
                 } else if (j === data.length - 1) {
                     data[data.length] = {
                         idReminder: reminder.getDataValue('id'),
+                        name: reminder.getDataValue('name'),
                         seconds,
                     };
                     j = data.length;
@@ -56,6 +58,7 @@ const getRemindersHours = async (req, res) => {
             if (data.length === 0) {
                 data.push({
                     idReminder: reminder.getDataValue('id'),
+                    name: reminder.getDataValue('name'),
                     seconds,
                 });
             }

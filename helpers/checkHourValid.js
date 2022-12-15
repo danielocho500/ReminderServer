@@ -15,7 +15,11 @@ const checkHourValid = (begin, end) => {
     const hourBegin = new Hour(begin);
     const hourEnd = new Hour(end);
 
-    if (hourBegin.hours >= hourEnd.hours) {
+    if (hourBegin.hours === hourEnd.hours && hourBegin.minutes >= hourEnd.minutes) {
+        return false;
+    }
+
+    if (hourBegin.hours > hourEnd.hours) {
         return false;
     }
 

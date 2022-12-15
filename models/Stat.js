@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/connection');
 
-const Stat = sequelize.define('Stat', {
+const Stats = sequelize.define('Stats', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -29,4 +29,4 @@ const Stat = sequelize.define('Stat', {
     },
 });
 
-module.exports = Stat;
+module.exports = Stats;

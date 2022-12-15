@@ -34,7 +34,7 @@ const pushStat = async (req, res) => {
         return responseMsg(res, 404, true, 'Reminder not found', {});
     }
 
-    const statFind = await sequelize.query(`SELECT * FROM stats WHERE fecha = '${getDateToday()}' AND uid = '${uid}' AND idReminder = '${idReminder}';`, { type: QueryTypes.SELECT });
+    const statFind = await sequelize.query(`SELECT * FROM Stats WHERE fecha = '${getDateToday()}' AND uid = '${uid}' AND idReminder = '${idReminder}';`, { type: QueryTypes.SELECT });
 
     if (statFind.length === 0) {
         const { hourBegin, hourEnd, minutesLapse } = reminder;

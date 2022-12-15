@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../database/connection');
+const { seqUser } = require('../database/connection');
 
-const User = sequelize.define('User', {
+const User = seqUser.define('User', {
     uid: {
         type: DataTypes.INTEGER,
         allowNull: false,
