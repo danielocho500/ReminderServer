@@ -12,8 +12,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-transporter.verify().then(() => {
-    console.log('Email Ready');
-});
+// transporter.verify().then(() => {
+//     console.log('Email Ready');
+// });
 
 module.exports = transporter;
