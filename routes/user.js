@@ -14,8 +14,6 @@ router.get('/', [
 ], getUserInfo);
 
 router.get('/data', [
-    validateParams,
-    validateJWT,
 ], getUserData);
 
 router.patch('/', [
