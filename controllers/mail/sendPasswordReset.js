@@ -15,7 +15,7 @@ const sendPasswordReset = async (req, res) => {
     const { email } = req.body;
 
     const valuePin = randomString(15);
-    const link = `http://localhost:3000/resetPass?pin=${valuePin}`;
+    const link = `https://amazing-melba-052a00.netlify.app/resetPass?pin=${valuePin}`;
 
     const isConnected = await verifyConnection();
     if (!isConnected) {

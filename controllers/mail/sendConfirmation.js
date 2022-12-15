@@ -17,7 +17,7 @@ const mailConfirmation = async (req, res) => {
 
   const valuePin = randomString(15);
   const uid = getUidByToken(req.headers.authtoken);
-  const link = `http://localhost:3000/confirmation?pin=${valuePin}`;
+  const link = `https://amazing-melba-052a00.netlify.app/confirmation?pin=${valuePin}`;
 
   const isConnected = await verifyConnection();
   if (!isConnected) {
